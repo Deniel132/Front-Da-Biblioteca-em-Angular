@@ -14,5 +14,5 @@ import { Header } from './componentes/header/header';
 })
 export class App {
   protected readonly title = signal('biblioteca-front');
-  titulo = 'teste';
+  titulo = 'teste2';
 }
