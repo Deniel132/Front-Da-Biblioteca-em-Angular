@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClienteDTO, Clientes, ClienteService } from '../../services/cliente/cliente-service';
 import Swal from 'sweetalert2';
@@ -11,7 +11,7 @@ import { NgClass } from '@angular/common';
   styleUrl: './content.css',
   standalone: true,
 })
-export class Content {
+export class Content implements OnInit {
   editar: boolean = false;
   idParaAlteracao: number = 0;
 
@@ -19,6 +19,9 @@ export class Content {
 
   ListaDeClientes = signal<Clientes[]>([]);
 
+  ngOnInit() {
+    this.getInfo();
+  }
 
   getInfo() {
     this.clienteSetvice.getClientes().subscribe((response) => {

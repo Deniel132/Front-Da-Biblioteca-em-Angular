@@ -1,0 +1,43 @@
+
+<div class="conteudo">
+  <img class="imagem" src="https://viagem.cnnbrasil.com.br/wp-content/uploads/sites/5/2025/02/Assador_credito-divulgacao.jpg?w=849&h=477&crop=0" alt="PratoInicial">
+
+  <div class="principal">
+    <h4>Controle de Livros</h4>
+
+    <div class="acoes-container">
+
+
+      <div class="livro-card">
+        <h2>Clientes no Base</h2>
+        <button (click)="getInfo()" class="button" style="background-color: #2d3436;">Atualizar Lista</button>
+
+        <div class="lista-scroll">
+          @for (livroInterface of ListaDeLivros(); track livroInterface.id){
+            <div class="livro-item"
+                 [class.cliente-inativo]="!livroInterface.ativo"
+                 [class.cliente-ativo]="livroInterface.ativo" >
+
+              <img src="{{livroInterface.LinkImagem}}" class="imagem-livro">
+              <span >{{livroInterface.id}} | {{livroInterface.titulo}} | {{livroInterface.autor}} </span>
+
+              @if (!livroInterface.ativo) {
+                <button class="button" (click)="reativar(livroInterface.id)">Ativar</button>
+              }@else{
+
+              }
+
+              <button class="buttonEditar" (click)="editarLivro(livroInterface.id,livroInterface)">Editar</button>
+              <button class="buttonDeletar" (click)="deletar(livroInterface.id)">Deletar</button>
+
+
+            </div>
+          }
+        </div>
+        <button (click)="deletarTodos()" class="buttonDeletar">Deletar Todos</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

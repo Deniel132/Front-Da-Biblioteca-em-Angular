@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Headr } from '../../services/header/headr';
+import { ClienteService } from '../../services/cliente/cliente-service';
 
 @Component({
   selector: 'app-header',
@@ -10,4 +11,5 @@ import { Headr } from '../../services/header/headr';
 })
 export class Header {
   private readonly headerServece = inject(Headr);
+  private readonly clienteService = inject(ClienteService);
 }

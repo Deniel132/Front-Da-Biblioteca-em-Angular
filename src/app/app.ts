@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import {Home}   from './componentes/home/home';
 import { Content } from './componentes/content/content';
 import { Header } from './componentes/header/header';
+import { Contatos } from './componentes/contatos/contatos';
 
 
 @Component({
   selector: 'app-root',
-  imports: [Content, Home, RouterOutlet, Header],
+  imports: [Content, Home, RouterOutlet, Header, Contatos],
   templateUrl: './app.html',
   styleUrl: './app.css',
   standalone: true,

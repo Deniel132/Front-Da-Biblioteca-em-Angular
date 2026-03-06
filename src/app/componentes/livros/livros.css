@@ -42,7 +42,7 @@
   margin-top: 20px;
 }
 
-.cliente-card {
+.livro-card {
   width: 100%;
   max-width: 750px;
   display: flex;
@@ -114,7 +114,7 @@ span{
   margin-top: 15px;
 }
 
-.cliente-item{
+.livro-item{
   display: flex;
   justify-content: space-between;
   align-items: center;

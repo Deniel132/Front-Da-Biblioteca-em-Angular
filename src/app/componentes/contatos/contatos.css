@@ -1,0 +1,36 @@
+.contato {
+  background: #2d3436;
+  color: #dfe6e9;
+  padding: 40px 5%;
+  margin-top: 50px;
+  display: flex;
+  gap: 40px;
+  flex-direction: revert-layer;
+  justify-content: center;
+  text-align: center;
+}
+
+.contato h2 {
+  margin-bottom: 15px;
+  color: #fab1a0;
+}
+
+
+.contato p {
+  margin: 5px 0;
+}
+
+.imgs{
+  padding-left: 50px;
+  padding-right: 50px;
+  max-width: 300px;
+}
+
+.logo-play-store{
+  width: 50px;
+  height: 50px;
+}
+.logo-Apple-store{
+  width: 70px;
+  height: 50px;
+}

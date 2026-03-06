@@ -1,16 +1,13 @@
 
-
-
 <div class="conteudo">
-  <img class="PratoInicial" src="https://viagem.cnnbrasil.com.br/wp-content/uploads/sites/5/2025/02/Assador_credito-divulgacao.jpg?w=849&h=477&crop=0" alt="PratoInicial">
+  <img class="imagem" src="https://viagem.cnnbrasil.com.br/wp-content/uploads/sites/5/2025/02/Assador_credito-divulgacao.jpg?w=849&h=477&crop=0" alt="PratoInicial">
 
-  <div class="reserva">
-    <h2>Bem-vindo à Biblioteca do HTML!</h2>
+  <div class="principal">
     <h4>Controle de Clientes</h4>
 
     <div class="acoes-container">
 
-      <div class="reserva-card">
+      <div class="cliente-card">
         <h2>Cadastro de Clientes</h2>
         <div class="id-container">
           <h3>Status:</h3>
@@ -22,17 +19,17 @@
         <input type="date" id="data" [(ngModel)]="data">
 
         @if (!editar) {
-          <button (click)="setInfo()" class="buttonReserva">Cadastrar</button>
+          <button (click)="setInfo()" class="button">Cadastrar</button>
         } @else {
-          <button (click)="alter()" class="buttonReserva">Editar</button>
+          <button (click)="alter()" class="button">Editar</button>
         }
 
         <h2 id="postInfo" style="font-size: 1rem; color: #30d64c;"></h2>
       </div>
 
-      <div class="reserva-card">
+      <div class="cliente-card">
         <h2>Clientes no Base</h2>
-        <button (click)="getInfo()" class="buttonReserva" style="background-color: #2d3436;">Atualizar Lista</button>
+        <button (click)="getInfo()" class="button" style="background-color: #2d3436;">Atualizar Lista</button>
 
         <div class="lista-scroll">
           @for (cliente of ListaDeClientes(); track cliente.id){
@@ -43,30 +40,22 @@
               <span >{{cliente.id}} | {{cliente.nome}} | {{cliente.email}} </span>
 
               @if (!cliente.status) {
-
-
-                <button class="buttonReativar" (click)="reativar(cliente.id)">Ativar</button>
+                <button class="button" (click)="reativar(cliente.id)">Ativar</button>
               }@else{
 
               }
 
               <button class="buttonEditar" (click)="editarCliente(cliente.id,cliente)">Editar</button>
-              <button class="buttonReserva" (click)="deletar(cliente.id)">Deletar</button>
+              <button class="buttonDeletar" (click)="deletar(cliente.id)">Deletar</button>
 
 
             </div>
           }
         </div>
-        <button (click)="deletarTodos()" class="buttonReserva">Deletar Todos</button>
+        <button (click)="deletarTodos()" class="buttonDeletar">Deletar Todos</button>
       </div>
 
     </div>
   </div>
-  <div class="contato">
-    <h2>Contato: </h2>
-    <p>Email: TiagoPilantra&#64;gmail.com</p>
-    <p>Telefone: (44) 99999-9999</p>
-    <p>Instagram: &#64;BibliotecaDoHTML</p>
 
-  </div>
 </div>
