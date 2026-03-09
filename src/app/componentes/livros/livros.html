@@ -1,6 +1,6 @@
 
 <div class="conteudo">
-  <img class="imagem" src="https://viagem.cnnbrasil.com.br/wp-content/uploads/sites/5/2025/02/Assador_credito-divulgacao.jpg?w=849&h=477&crop=0" alt="PratoInicial">
+  <img class="imagem" src="https://img.freepik.com/fotos-gratis/abundante-colecao-de-livros-antigos-em-prateleiras-de-madeira-geradas-por-ia_188544-29660.jpg?semt=ais_hybrid&w=740&q=80" alt="PratoInicial">
 
   <div class="principal">
     <h4>Controle de Livros</h4>
@@ -9,14 +9,15 @@
 
 
       <div class="livro-card">
-        <h2>Clientes no Base</h2>
-        <button (click)="getInfo()" class="button" style="background-color: #2d3436;">Atualizar Lista</button>
+        <h2>Cadastro de Livros</h2>
+        <button (click)="setInfo()" class="button" style="background-color: #2d3436;">Adicionar Livro</button>
+        <button (click)="setByISBN()" class="button" style="background-color: #2d3436;">Adicionar Livro Pelo ISBN</button>
 
         <div class="lista-scroll">
           @for (livroInterface of ListaDeLivros(); track livroInterface.id){
             <div class="livro-item"
-                 [class.cliente-inativo]="!livroInterface.ativo"
-                 [class.cliente-ativo]="livroInterface.ativo" >
+                 [class.livro-inativo]="!livroInterface.ativo || livroInterface.emprestado"
+                 [class.livro-ativo]="livroInterface.ativo    || !livroInterface.emprestado" >
 
               <img src="{{livroInterface.LinkImagem}}" class="imagem-livro">
               <span >{{livroInterface.id}} | {{livroInterface.titulo}} | {{livroInterface.autor}} </span>

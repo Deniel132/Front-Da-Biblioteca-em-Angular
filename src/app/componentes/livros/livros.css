@@ -104,12 +104,12 @@ input[type="text"], input[type="date"], #imput {
 
 span{
   max-width: 400px;
-  min-width: 400px;
+  min-width: 300px;
 }
 
 .lista-scroll {
   width: 100%;
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
   margin-top: 15px;
 }
@@ -126,11 +126,11 @@ span{
   min-width: 700px;
 }
 
-.cliente-ativo{
+.livro-ativo{
   border-left: 5px solid green;
 }
 
-.cliente-inativo{
+.livro-inativo{
   border-left: 5px solid red;
 }
 

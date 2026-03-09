@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, linkedSignal, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Livro, livroDTO, livroInterface } from '../../services/livro/livro';
@@ -11,8 +11,7 @@ import { Livro, livroDTO, livroInterface } from '../../services/livro/livro';
   styleUrl: './livros.css',
 })
 export class Livros implements OnInit {
-  editar: boolean = false;
-  idParaAlteracao: number = 0;
+
 
   private readonly livroService = inject(Livro);
 
@@ -76,47 +75,71 @@ export class Livros implements OnInit {
       html: `
     <input id="titulo" class="swal2-input" placeholder="titulo">
     <input id="estado" class="swal2-input" placeholder="estado">
+    <input id="autor" class="swal2-input" placeholder="autor">
+     <input id="LinkImagem" class="swal2-input" placeholder="Link imagem">
   `,
       showCancelButton: true,
     }).then((result) => {
+
+      const titulo = (document.getElementById('titulo') as HTMLInputElement).value.trim();
+      const status = (document.getElementById('estado') as HTMLInputElement).value.trim();
+      const autor = (document.getElementById('autor') as HTMLInputElement).value.trim();
+      const Link = (document.getElementById('LinkImagem') as HTMLInputElement).value.trim();
+
       if (result.isConfirmed) {
         const novoLivro: livroDTO = {
-          titulo: (document.getElementById('titulo') as HTMLInputElement).value,
-          estadoDeUso: (document.getElementById('estado') as HTMLInputElement).value,
+          titulo: titulo,
+          statusDeUso: status,
+          autor: autor,
+          LinkImagem: Link,
         };
 
-        this.livroService.setLivros(novoLivro).subscribe({
-          next: async () => {
-            await Swal.fire('Sucesso!', 'Livro cadastrado com sucesso!', 'success');
-            this.getInfo();
-          },
-          error: (err) => {
-            Swal.fire('Erro!', 'nao foi possível cadastrar o Livro.', 'error');
-            console.error(err);
-          },
-        });
-      }
-    });
+        if (!titulo || !status || !autor || !Link) {
+          Swal.fire({
+            title: 'Campo vazio',
+            text: 'Digite um ISBN válido.',
+            icon: 'warning',
+          });
+        } else {
+          this.livroService.setLivros(novoLivro).subscribe({
+            next: async () => {
+              await Swal.fire('Sucesso!', 'Livro cadastrado com sucesso!', 'success');
+              this.getInfo();
+            },
+            error: (err) => {
+              Swal.fire('Erro!', 'nao foi possível cadastrar o Livro.', 'error');
+              console.error(err);
+            },
+          });
+        }
 
-    this.editar = false;
+      }
+      });
   }
+
 
   editarLivro(id: number, livros: livroInterface) {
     Swal.fire({
       title: 'Novo Livro',
       html: `
     <input id="titulo" class="swal2-input" placeholder="titulo" value="${livros.titulo}">
-    <input id="estado" class="swal2-input" placeholder="estado"value="${livros.estadoDeUso}">
+    <input id="estado" class="swal2-input" placeholder="estado" value="${livros.statusDeUso}">
   `,
       showCancelButton: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        const novoLivro: livroDTO = {
+        const novoLivro: livroInterface = {
+          id: livros.id,
           titulo: (document.getElementById('titulo') as HTMLInputElement).value,
-          estadoDeUso: (document.getElementById('estado') as HTMLInputElement).value,
+          emprestado: livros.emprestado,
+          statusDeUso: (document.getElementById('estado') as HTMLInputElement).value,
+          LinkImagem: livros.LinkImagem,
+          autor: livros.autor,
+          ativo: livros.ativo,
         };
 
-        this.livroService.alterar(this.idParaAlteracao, novoLivro).subscribe(() => {
+        console.log(novoLivro);
+        this.livroService.alterar(novoLivro.id, novoLivro).subscribe(() => {
           Swal.fire({
             title: 'Alterado!',
             text: 'O Livro foi Alterado.',
@@ -149,19 +172,32 @@ export class Livros implements OnInit {
   `,
       showCancelButton: true,
     }).then((result) => {
+      const isbn = (document.getElementById('ISBN') as HTMLInputElement).value.trim();
+
       if (result.isConfirmed) {
-        this.livroService
-          .setLivrosISBN((document.getElementById('estado') as HTMLInputElement).value)
-          .subscribe(() => {
+        if (!isbn){
+          Swal.fire({
+            title: 'Campo vazio',
+            text: 'Digite um ISBN válido.',
+            icon: 'warning',
+          });
+        }else{
+          this.livroService.setLivrosISBN(isbn).subscribe(() => {
             Swal.fire({
-              title: 'Reativado!',
-              text: 'O livro foi Reativado.',
+              title: 'Livro Adicionado!',
+              text: 'O livro foi Adicionado.',
               icon: 'success',
               showConfirmButton: false,
             });
             this.getInfo();
           });
+        }
       }
     });
   }
+
+
+
+
+
 }
